@@ -12,11 +12,14 @@ d3.json(queryUrl).then(function (data) {
 function createFeatures(earthquakeData) {
 
   // Define a function for each feature in the features array
-  // Give each feature a popup that describes the place and time of the earthquake.
+  // Give each quake a features popup that describes the place, time, magnitude and depth of the earthquake. Also includes
+  // a link to the page for the earthquake on the USGS site.
   function onEachFeature(feature, layer) {
     layer.bindPopup(`<h3>${feature.properties.place}</h3><hr>
-                    <h3>Magnitude: ${feature.properties.mag}</h3>
-                    <p>${new Date(feature.properties.time)}</p>`);
+                     <p>${new Date(feature.properties.time)}</p>
+                     <h4>Magnitude: ${feature.properties.mag}</h4>
+                     <h4>Depth(km): ${feature.geometry.coordinates[2]}</h4>
+                     <a href="${feature.properties.url}" target="_blank">Earthquake Details</a>`);
   }
 
   // Create a GeoJSON layer that contains the features array on the earthquakeData object.
@@ -66,5 +69,7 @@ function createMap(earthquakes) {
     L.control.layers(baseMaps, overlayMaps, {
       collapsed: false
     }).addTo(myMap);
+
+    // Add circles to the map sized according to magnitude
   
   }
