@@ -25,6 +25,34 @@ function createFeatures(earthquakeData) {
   // Create a GeoJSON layer that contains the features array on the earthquakeData object.
   // Run the onEachFeature function once for each piece of data in the array.
   var earthquakes = L.geoJSON(earthquakeData, {
+    // Return new layer for each feature
+    addNewLayer: function(feature, latlng) {
+        // Determine the depth of each earthquake and set the fill color
+        var depth = feature.geometry.coordinates[2];
+        var markerFillColor;
+        if (depth > 90) {
+            markerFillColor = "#ff0000";
+        } else if (depth > 70) {
+            markerFillColor = "#ff6600";
+        } else if (depth > 50) {
+            markerFillColor = "#ff9900";
+        } else if (depth > 30) {
+            markerFillColor = "#ffff00";
+        } else if (depth > 10) {
+            markerFillColor = "#99ff33";
+        } else {
+            markerFillColor = "#009933"
+        }
+        // Return the circle marker with the appropriate radius and fill color
+        return L.circleMarker(latlng, {
+            radius: feature.properties.mag * 5,
+            markerFillColor: markerFillColor,
+            color: "#000"
+            //weight: .3,
+            //opacity: 1,
+            //fillOpacity: 0.8
+        });
+    },  
     onEachFeature: onEachFeature
   });
 
