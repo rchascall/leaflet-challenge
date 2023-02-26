@@ -1,7 +1,7 @@
 # USGS Earthquake Data Mapper
 ## Earthquakes the past 30 days of magnitude 2.5 or greater
 
-![USGS image](https://earthquake.usgs.gov/images/globes/36_127.jpg)
+!["USGS image"](https://earthquake.usgs.gov/images/globes/36_127.jpg)
 
 This project retrieves earthquake data from the USGS website and uses D3 json and leaflet to create an interactive map of earthquakes with a magnitude of 2.5 or greater. The map plots earthquakes based on longitude and latitude and represents their magnitude through the size of the circle markers and their depth through the color of the circle markers. The larger the circle, the greater the magnitude of the earthquake, and the darker the color, the greater the depth of the earthquake.
 
