@@ -26,7 +26,7 @@ function createFeatures(earthquakeData) {
   // Run the onEachFeature function once for each piece of data in the array.
   var earthquakes = L.geoJSON(earthquakeData, {
     // Return new layer for each feature
-    addNewLayer: function(feature, latlng) {
+    pointToLayer: function(feature, latlng) {
         // Determine the depth of each earthquake and set the fill color
         var depth = feature.geometry.coordinates[2];
         var markerFillColor;
@@ -41,16 +41,16 @@ function createFeatures(earthquakeData) {
         } else if (depth > 10) {
             markerFillColor = "#99ff33";
         } else {
-            markerFillColor = "#009933"
+            markerFillColor = "#009933";
         }
         // Return the circle marker with the appropriate radius and fill color
         return L.circleMarker(latlng, {
             radius: feature.properties.mag * 5,
-            markerFillColor: markerFillColor,
-            color: "#000"
-            //weight: .3,
-            //opacity: 1,
-            //fillOpacity: 0.8
+            fillColor: markerFillColor,
+            color: "#000",
+            weight: .3,
+            opacity: 1,
+            fillOpacity: 0.8
         });
     },  
     onEachFeature: onEachFeature
@@ -98,6 +98,37 @@ function createMap(earthquakes) {
       collapsed: false
     }).addTo(myMap);
 
-    // Add circles to the map sized according to magnitude
+    function getColor(depth) {
+        if (depth > 90) {
+            return "#ff0000";
+        } else if (depth > 70)  {
+            return "#ff6600";
+        } else if (depth > 50)  {
+            return "#ff9900";
+        } else if (depth > 30)  {
+            return "#ffff00";
+        } else if (depth > 10)  {
+            return "#99ff33";
+        } else  {
+            return "#009933";
+        }
+
+    }
+
+    // Create a legend to display information about the depth ranges
+    var legend = L.control({
+        position: "bottomright"
+      });
+
+    legend.onAdd = function(map) {
+        var div = L.DomUtil.create("div", "legend");
+        var depths = [-10, 10, 30, 50, 70, 90];
+        var labels = ["-10-10", "10-30", "30-50", "50-70", "70-90", "90+"];
+        // Write dynamic html for legend
+        for (var i = 0; i , depths.length; i++) {
+            div.innerHTML += '<i style="background:' + getColor(depths[i] + 1) + '"></i> ' + labels[i] + '<br>';
+        }
+        return div;
+    };
   
   }
