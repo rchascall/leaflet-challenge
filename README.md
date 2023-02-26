@@ -2,6 +2,7 @@
 ## Earthquakes the past 30 days of magnitude 2.5 or greater
 
 ![USGS image](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/side_image/public/thumbnails/image/1964_EQ_slider.jpg?itok=OnEpZTp4)
+
 *Sources/Usage: Public Domain.*
 *Damage from the 1964 Alaskan Earthquake. Credit: USGS (Public domain.)*
 
