@@ -9,4 +9,19 @@ html {
   height: 100%;
 }
 
+.legend {
+  background-color: white;
+  padding: 12px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 24px;
+  color: #555;
+}
 
+.legend i {
+  width: 40px;
+  height: 24px;
+  float: left;
+  margin-right: 8px;
+}
